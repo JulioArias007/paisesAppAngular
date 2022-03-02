@@ -3,7 +3,11 @@
 
 <div class="row">
   <div class="col">
-    <app-pais-input></app-pais-input>
+    <app-pais-input
+    (onEnter)="buscar( $event )"
+    placeHolderIteracion = "Buscar por Pais..."
+    >
+    </app-pais-input>
   </div>
 </div>
 <hr>
