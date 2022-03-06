@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { switchMap } from "rxjs/operators";
 import { PaisService } from '../../services/pais.service';
 
 @Component({
@@ -16,7 +17,14 @@ export class VerPaisComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.activateRoute.params.subscribe(
+    this.activateRoute.params
+    .pipe(
+      switchMap(({idPais}) => this.paisService.getPaisPorAlpha(idPais))
+    )
+    .subscribe(resp => {
+      console.log(resp);
+    })
+    /* this.activateRoute.params.subscribe(
       ({idPais}) => {
         console.log(idPais);
         this.paisService.getPaisPorAlpha(idPais)
@@ -24,6 +32,7 @@ export class VerPaisComponent implements OnInit {
           console.log(paises);
         })
       }
-    )
+    ) */
+
   }
 }
